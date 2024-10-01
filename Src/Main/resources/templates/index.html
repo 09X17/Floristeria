@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floristería - Panel Principal</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .navbar {
+            background-color: #28a745;
+        }
+
+        .navbar-brand {
+            color: white;
+            font-weight: bold;
+        }
+
+        .navbar-brand:hover {
+            color: #fff;
+        }
+
+        .container {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .btn-custom {
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 8px;
+        }
+
+        .card {
+            border: none;
+            margin-top: 20px;
+        }
+
+        .card-body {
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="#">Floristería</a>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container">
+    <h1>Panel de Gestión</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3>Gestión de Inventario</h3>
+                    <p>Administra las flores y el stock disponible en tu tienda.</p>
+                    <a href="/flores" class="btn btn-success btn-custom">Ir a Inventario</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3>Gestión de Pedidos</h3>
+                    <p>Gestiona los pedidos de tus clientes y controla su estado.</p>
+                    <a href="/pedidos" class="btn btn-primary btn-custom">Ir a Pedidos</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6"></div>
+            <div class="card">
+                <div class="card-body">
+                    <h3>Informes</h3>
+                    <p>Gestiona los informes de la floristeria.</p>
+                    <a href="/informes" class="btn btn-primary btn-custom">Ir a Informes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

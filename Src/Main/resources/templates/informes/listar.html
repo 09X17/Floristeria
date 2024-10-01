@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Informes de Ventas</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+    <h1>Informes de Ventas</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Tipo de Flor</th>
+                <th>Total Vendido</th>
+                <th>Ingresos Generados</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="venta : ${ventas}">
+                <td th:text="${venta[0]}"></td>
+                <td th:text="${venta[1]}"></td>
+                <td th:text="${venta[2]}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
