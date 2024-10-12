@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Actualizar Estado de Entrega</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="mb-4">Actualizar Estado de Entrega</h1>
+    <form th:action="@{/entregas/actualizar-estado/{id}(id=${entrega.id})}" method="post">
+        <input type="hidden" name="_method" value="put" />
+        <div class="form-group">
+            <label>ID de Entrega</label>
+            <input type="text" class="form-control" th:value="${entrega.id}" readonly />
+        </div>
+        <div class="form-group">
+            <label>Nuevo Estado</label>
+            <select class="form-control" name="estado">
+                <option value="PENDIENTE">Pendiente</option>
+                <option value="EN_CAMINO">En Camino</option>
+                <option value="ENTREGADO">Entregado</option>
+                <option value="CANCELADO">Cancelado</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-edit mt-3">Actualizar Estado</button>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
