@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Floristería - Panel Principal</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}"/>
-    <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #f8f9fa;
+            background-color: #e9ecef;
             font-family: 'Arial', sans-serif;
         }
 
@@ -35,22 +34,60 @@
             padding: 15px 30px;
             font-size: 18px;
             border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-custom:hover {
+            background-color: #218838;
         }
 
         .card {
             border: none;
             margin-top: 20px;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
         }
 
         .card-body {
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
             font-size: 36px;
             margin-bottom: 40px;
+            color: #28a745;
+        }
+
+        footer {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #28a745;
+            color: white;
+        }
+
+        .login-form {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .login-form input {
+            margin-right: 10px;
+        }
+
+        .login-form .access-message {
+            margin-left: 10px;
+            color: white;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -60,6 +97,16 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand" href="#">Floristería</a>
+        <div class="collapse navbar-collapse">
+            <div class="login-form">
+                <form th:action="@{/login}" method="post" onsubmit="showAccessMessage(event)">
+                    <input class="form-control me-2" type="text" name="username" placeholder="Usuario" required>
+                    <input class="form-control me-2" type="password" name="password" placeholder="Contraseña" required>
+                    <button class="btn btn-outline-light" type="submit">Iniciar Sesión</button>
+                    <span id="access-message" class="access-message"></span>
+                </form>
+            </div>
+        </div>
     </div>
 </nav>
 
@@ -68,7 +115,7 @@
     <h1>Panel de Gestión</h1>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
                     <h3>Gestión de Inventario</h3>
@@ -78,7 +125,7 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
                     <h3>Gestión de Pedidos</h3>
@@ -88,20 +135,54 @@
             </div>
         </div>
 
-        <div class="col-md-6"></div>
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
                     <h3>Informes</h3>
-                    <p>Gestiona los informes de la floristeria.</p>
-                    <a href="/informes" class="btn btn-primary btn-custom">Ir a Informes</a>
+                    <p>Gestiona los informes de la floristería.</p>
+                    <a href="/informes" class="btn btn-info btn-custom">Ir a Informes</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h3>Entregas</h3>
+                    <p>Gestiona las entregas de los pedidos.</p>
+                    <a href="/entregas" class="btn btn-warning btn-custom">Ir a Entregas</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h3>Facturas</h3>
+                    <p>Muestra las facturas generadas.</p>
+                    <a href="/facturas" class="btn btn-danger btn-custom">Ir a Facturas</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Bootstrap JS and dependencies -->
+<!-- Footer -->
+<footer>
+    <div class="container text-center">
+        <p>&copy; 2024 Floristería. Todos los derechos reservados.</p>
+        <p>Contáctanos: info@floristeria.com</p>
+    </div>
+</footer>
+
+<!-- JavaScript -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script>
+    function showAccessMessage(event) {
+        event.preventDefault(); // Prevenir envío del formulario para prueba
+        document.getElementById('access-message').textContent = 'Acceso Correcto';
+    }
+</script>
 </body>
 </html>

@@ -20,19 +20,31 @@ public class EntregaService {
     private NotificacionService notificacionService;
 
     @Transactional
-    public Entrega asignarEntrega(Entrega entrega) {
+    public Entrega crearEntrega(Entrega entrega) {
+        if (entrega == null) {
+            throw new NullPointerException("Entrega no puede ser null");
+        }
         return entregaRepository.save(entrega);
     }
 
     @Transactional
-    public void actualizarEstado(Long id, EstadoEntrega estado) {
+    public void actualizarEstadoEntrega(Long id, EstadoEntrega estado) {
+        if (id == null) {
+            throw new NullPointerException("Id de entrega no puede ser null");
+        }
+        if (estado == null) {
+            throw new NullPointerException("Estado de entrega no puede ser null");
+        }
         Entrega entrega = entregaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Entrega no encontrada"));
+                .orElseThrow(() -> new EntityNotFoundException("Entrega no encontrada"));
         entrega.setEstadoEntrega(estado);
         entregaRepository.save(entrega);
     }
 
-    public void notificarCliente(Long id) {
+    public void notificarClienteSobreEntrega(Long id) {
+        if (id == null) {
+            throw new NullPointerException("Id de entrega no puede ser null");
+        }
         Entrega entrega = entregaRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Entrega no encontrada"));
 
@@ -44,7 +56,7 @@ public class EntregaService {
         }
     }
 
-    public List<Entrega> listarEntregas() {
+    public List<Entrega> obtenerEntregas() {
         return entregaRepository.findAll();
     }
-}
+}  

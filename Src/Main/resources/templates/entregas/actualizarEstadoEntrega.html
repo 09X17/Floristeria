@@ -9,15 +9,15 @@
 <body>
 <div class="container mt-5">
     <h1 class="mb-4">Actualizar Estado de Entrega</h1>
-    <form th:action="@{/entregas/actualizar-estado/{id}(id=${entrega.id})}" method="post">
+    <form th:object="${entrega}" th:action="@{/entregas/actualizar-estado/{id}(id=${entrega.id})}" method="post">
         <input type="hidden" name="_method" value="put" />
         <div class="form-group">
-            <label>ID de Entrega</label>
-            <input type="text" class="form-control" th:value="${entrega.id}" readonly />
+            <label for="idEntrega">ID de Entrega</label>
+            <input type="text" class="form-control" id="idEntrega" th:value="${entrega.id}" readonly />
         </div>
         <div class="form-group">
-            <label>Nuevo Estado</label>
-            <select class="form-control" name="estado">
+            <label for="estado">Nuevo Estado</label>
+            <select class="form-control" id="estado" th:field="*{estado}">
                 <option value="PENDIENTE">Pendiente</option>
                 <option value="EN_CAMINO">En Camino</option>
                 <option value="ENTREGADO">Entregado</option>
@@ -25,6 +25,7 @@
             </select>
         </div>
         <button type="submit" class="btn btn-edit mt-3">Actualizar Estado</button>
+        <a th:href="@{/entregas}" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

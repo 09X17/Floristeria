@@ -9,18 +9,19 @@
 <body>
 <div class="container mt-5">
     <h1 class="mb-4">Asignar Conductor a Entrega</h1>
-    <form th:action="@{/api/entregas/asignar}" method="post">
+    <form th:object="${entrega}" th:action="@{/entregas/asignar}" method="post">
         <div class="form-group">
-            <label>ID de Entrega</label>
-            <input type="text" class="form-control" th:value="${entrega.id}" readonly />
+            <label for="idEntrega">ID de Entrega</label>
+            <input type="text" class="form-control" id="idEntrega" th:value="${entrega.id}" readonly />
         </div>
         <div class="form-group">
-            <label>Seleccione Conductor</label>
-            <select class="form-control" name="conductorId">
+            <label for="conductorId">Seleccione Conductor</label>
+            <select class="form-control" id="conductorId" name="conductorId" th:field="*{conductorId}">
                 <option th:each="conductor : ${conductores}" th:value="${conductor.id}" th:text="${conductor.nombre}"></option>
             </select>
         </div>
         <button type="submit" class="btn btn-custom mt-3">Asignar Conductor</button>
+        <a th:href="@{/entregas}" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago de Factura</title>
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Enlaza tus estilos CSS aquí -->
+</head>
+<body>
+    <div class="container">
+        <h1>Pago de Factura</h1>
+
+        <h2>Factura: {{ factura.id }}</h2>
+        <p><strong>Nombre del Cliente:</strong> {{ factura.nombreCliente }}</p>
+        <p><strong>Total:</strong> {{ factura.total }} €</p>
+
+        <form action="/pagos/procesar/{{ factura.id }}" method="post">
+            <div class="form-group">
+                <label for="metodoPago">Método de Pago:</label>
+                <select id="metodoPago" name="metodoPago" required>
+                    <option value="" disabled selected>Seleccione un método de pago</option>
+                    <option value="tarjeta">Tarjeta de Crédito</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="transferencia">Transferencia Bancaria</option>
+                    <!-- Agrega otros métodos de pago según sea necesario -->
+                </select>
+            </div>
+
+            <button type="submit">Procesar Pago</button>
+        </form>
+
+        <a href="/facturas">Volver a la lista de facturas</a>
+    </div>
+</body>
+</html>

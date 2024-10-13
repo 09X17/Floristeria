@@ -13,9 +13,15 @@
     <!-- Mensajes de éxito y error -->
     <div th:if="${successMessage}" class="alert alert-success" role="alert">
         <span th:text="${successMessage}"></span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
     <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
         <span th:text="${errorMessage}"></span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 
     <a href="/entregas/nueva" class="btn btn-custom mb-3">Programar Nueva Entrega</a>
@@ -38,14 +44,17 @@
                 <td>
                     <a th:href="@{'/entregas/asignar/' + ${entrega.id}}" class="btn btn-primary">Asignar</a>
                     <form th:action="@{/entregas/actualizar-estado/${entrega.id}}" method="post" style="display:inline;">
+                        <input type="hidden" name="_method" value="put">
                         <select name="estado" class="form-select" style="display:inline; width:auto;">
                             <option value="EN_RUTA">En Ruta</option>
                             <option value="ENTREGADO">Entregado</option>
                             <option value="CANCELADO">Cancelado</option>
                         </select>
                         <button type="submit" class="btn btn-warning">Actualizar Estado</button>
-                    </form>
+                    </form>                    
                     <a th:href="@{'/entregas/notificar-cliente/' + ${entrega.id}}" class="btn btn-success">Notificar Cliente</a>
+                    <a th:href="@{'/entregas/eliminar/' + ${entrega.id}}" class="btn btn-danger">Eliminar</a>
+                    <a th:href="@{'/entregas/detalles/' + ${entrega.id}}" class="btn btn-info">Detalles</a>
                 </td>
             </tr>
         </tbody>

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import jakarta.persistence.EntityNotFoundException; // Asegúrate de agregar esta importación
+import jakarta.persistence.EntityNotFoundException; 
 import java.util.List;
 
 @Controller
@@ -20,39 +20,49 @@ public class EntregaController {
 
     @GetMapping
     public String listarEntregas(Model model) {
-        List<Entrega> entregas = entregaService.listarEntregas(); // Ahora debería funcionar
+        List<Entrega> entregas = entregaService.obtenerEntregas();
         model.addAttribute("entregas", entregas);
-        return "entregas/entregas"; // Ruta a tu archivo HTML
+        return "entregas/entregas";
     }
 
     @PostMapping("/asignar")
     public String asignarEntrega(@ModelAttribute Entrega entrega) {
-        entregaService.asignarEntrega(entrega);
-        return "redirect:/entregas"; // Redirigir después de asignar
+        if (entrega == null || entrega.getId() == null) {
+            
+            return "redirect:/entregas?error=Entrega no válida";
+        }
+        entregaService.crearEntrega(entrega);
+        return "redirect:/entregas";
     }
 
     @PutMapping("/actualizar-estado/{id}")
     public String actualizarEstado(@PathVariable Long id, @RequestParam EstadoEntrega estado) {
-        entregaService.actualizarEstado(id, estado);
-        return "redirect:/entregas"; // Redirigir después de actualizar
+        try {
+            entregaService.actualizarEstadoEntrega(id, estado);
+        } catch (Exception e) {
+            return "redirect:/entregas?error=Error al actualizar estado";
+        }
+        return "redirect:/entregas";
     }
 
     @GetMapping("/notificar-cliente/{id}")
     public String notificarCliente(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         try {
-            entregaService.notificarCliente(id);
+            entregaService.notificarClienteSobreEntrega(id);
             redirectAttributes.addFlashAttribute("successMessage", "Notificación enviada con éxito.");
         } catch (IllegalStateException e) {
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
         } catch (EntityNotFoundException e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Entrega no encontrada.");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Error al notificar cliente.");
         }
-        return "redirect:/entregas"; // Redirigir después de notificar
+        return "redirect:/entregas";
     }
 
     @GetMapping("/nueva")
     public String mostrarFormularioNuevaEntrega(Model model) {
-        model.addAttribute("entrega", new Entrega()); // Asegúrate de que la clase Entrega tenga un constructor sin argumentos
-        return "entregas/nuevaEntrega"; // Ruta a tu archivo HTML para crear una nueva entrega
+        model.addAttribute("entrega", new Entrega());
+        return "entregas/nuevaEntrega";
     }
 }
